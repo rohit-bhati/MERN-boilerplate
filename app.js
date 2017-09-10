@@ -4,14 +4,17 @@ var favicon = require('serve-favicon')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
+import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
 var index = require('./routes/index')
-var users = require('./routes/users')
-import api from './routes/api'
+import users from './routes/users'
 
 var app = express()
+mongoose.connect(process.env.MONGODB_URL, { useMongoClient: true }, err =>
+  console.log('> Connected to Database...')
+)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -27,7 +30,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
 app.use('/users', users)
-app.use('/api', api)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
