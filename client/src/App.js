@@ -1,8 +1,10 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
+import HomePage from './components/pages/HomePage'
 
 const App = () => (
-  <div>
-    <h1>Hello World</h1>
+  <div className="ui container">
+    <Route path="/" exact component={HomePage} />
   </div>
 )
 
