@@ -12,7 +12,10 @@ var index = require('./routes/index')
 import users from './routes/users'
 
 var app = express()
-mongoose.connect(process.env.MONGODB_URL, { useMongoClient: true }, err =>
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true }, err =>
   console.log('> Connected to Database...')
 )
 
